@@ -4,228 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aemino - AI Innovation Redefined</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-green: #4a9d7f;
-            --dark-green: #2d5f4f;
-            --light-green: #6bc4a0;
-            --yellow: #f4d35e;
-            --dark-bg: #0a0f0d;
-            --card-bg: #111816;
-            --text-primary: #ffffff;
-            --text-secondary: #a0b3a8;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            background: #0a0f0d;
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .bg-gradient {
+        .gradient-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #0a0f0d 0%, #1a2f25 50%, #0a0f0d 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             z-index: -2;
         }
 
-        .bg-pattern {
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .logo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            max-width: 800px;
+            max-height: 800px;
+            opacity: 0.02;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url('https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -48%) rotate(5deg) scale(1.05); }
+        }
+
+        .grid-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             opacity: 0.03;
-            background-image: radial-gradient(circle at 1px 1px, var(--primary-green) 1px, transparent 0);
-            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(rgba(74, 157, 127, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 157, 127, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
+            pointer-events: none;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 15, 13, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(74, 157, 127, 0.1);
+        .glass {
+            background: rgba(17, 24, 22, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(74, 157, 127, 0.1);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-green);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8rem 5% 4rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--light-green), var(--yellow));
+        .gradient-text {
+            background: linear-gradient(135deg, #6bc4a0, #f4d35e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            font-weight: 300;
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--primary-green);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border: 2px solid var(--primary-green);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .cta-button:hover {
-            background: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(74, 157, 127, 0.3);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--light-green);
-        }
-
-        .about-text p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-500 { animation-delay: 0.5s; }
 
         .project-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(74, 157, 127, 0.1);
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -234,336 +118,522 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-green), var(--yellow));
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-green);
-            box-shadow: 0 20px 40px rgba(74, 157, 127, 0.2);
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(107, 196, 160, 0.1), transparent);
+            transition: left 0.5s;
         }
 
         .project-card:hover::before {
-            transform: scaleX(1);
+            left: 100%;
         }
 
-        .project-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(107, 196, 160, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(74, 157, 127, 0.25);
         }
 
-        .project-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--light-green);
+        .icon-float {
+            animation: iconFloat 3s ease-in-out infinite;
         }
 
-        .project-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .project-status {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background: rgba(74, 157, 127, 0.2);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--light-green);
-            font-weight: 600;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
         }
 
-        /* Founder Section */
-        .founder-section {
-            background: var(--card-bg);
-            border-radius: 30px;
-            padding: 4rem;
-            border: 1px solid rgba(74, 157, 127, 0.1);
-        }
-
-        .founder-content {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 4rem;
+        .modal.active {
+            display: flex;
             align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        .founder-image {
+        .modal-content {
+            background: rgba(17, 24, 22, 0.95);
+            border: 1px solid rgba(74, 157, 127, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            animation: slideUp 0.4s ease-out;
             position: relative;
         }
 
-        .founder-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .founder-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--light-green);
-        }
-
-        .founder-title {
-            font-size: 1.2rem;
-            color: var(--yellow);
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-
-        .founder-bio {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 5%;
-            border-top: 1px solid rgba(74, 157, 127, 0.1);
-            color: var(--text-secondary);
-        }
-
-        footer p {
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-green);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px) scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
+        .scroll-indicator {
+            animation: bounce 2s infinite;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .about-content,
-            .founder-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            section {
-                padding: 4rem 5%;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .founder-section {
-                padding: 2rem;
-            }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+        nav {
+            transition: all 0.3s ease;
         }
 
-        /* Scroll Reveal */
+        nav.scrolled {
+            background: rgba(10, 15, 13, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0f0d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #4a9d7f, #6bc4a0);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #6bc4a0, #f4d35e);
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(50px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-glow:hover::after {
+            width: 300px;
+            height: 300px;
+        }
     </style>
 </head>
-<body>
-    <div class="bg-gradient"></div>
-    <div class="bg-pattern"></div>
+<body class="text-white">
+    <div class="gradient-bg"></div>
+    <div class="logo-watermark"></div>
+    <div class="grid-pattern"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#" class="logo">
-            <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" alt="aemino logo">
-            <span>aemino</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#founder">Founder</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <nav id="navbar" class="fixed top-0 w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" 
+                     alt="aemino" 
+                     class="h-10 w-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                <span class="text-2xl font-bold gradient-text">aemino</span>
+            </a>
+            <ul class="hidden md:flex gap-8 items-center">
+                <li><a href="#about" class="text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 font-medium">About</a></li>
+                <li><a href="#projects" class="text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 font-medium">Projects</a></li>
+                <li><a href="#founder" class="text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 font-medium">Founder</a></li>
+                <li><a href="#contact" class="px-6 py-2 bg-[#4a9d7f] hover:bg-[#6bc4a0] rounded-full transition-all duration-300 font-semibold btn-glow">Contact</a></li>
+            </ul>
+            <button id="mobile-menu-btn" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>AI Innovation Redefined</h1>
-            <p>Building the future of artificial intelligence with cutting-edge solutions that transform industries and empower humanity.</p>
-            <a href="#projects" class="cta-button">Explore Our Vision</a>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 glass transform translate-x-full transition-transform duration-300 z-50 md:hidden">
+        <div class="p-6">
+            <button id="close-menu" class="text-2xl mb-8 float-right">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="space-y-6 mt-16">
+                <li><a href="#about" class="block text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 text-lg">About</a></li>
+                <li><a href="#projects" class="block text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 text-lg">Projects</a></li>
+                <li><a href="#founder" class="block text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 text-lg">Founder</a></li>
+                <li><a href="#contact" class="block text-gray-400 hover:text-[#6bc4a0] transition-colors duration-300 text-lg">Contact</a></li>
+            </ul>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="reveal">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Pioneering Tomorrow's Intelligence</h2>
-                <p>At aemino, we're not just building AI—we're crafting the foundation for a smarter, more connected future. Our mission is to develop artificial intelligence that's accessible, ethical, and transformative.</p>
-                <p>We believe in AI that augments human potential, solves real-world challenges, and creates opportunities for innovation across every industry.</p>
-                <p>Through rigorous research, cutting-edge technology, and a commitment to responsible AI development, we're shaping the next generation of intelligent systems.</p>
+    <section class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="fade-in-up">
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 gradient-text leading-tight">
+                    AI Innovation<br>Redefined
+                </h1>
             </div>
-            <div class="about-image">
-                <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" alt="aemino AI visualization">
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto fade-in-up delay-200 font-light">
+                Building the future of artificial intelligence with cutting-edge tools that transform industries and empower humanity.
+            </p>
+            <div class="flex gap-4 justify-center fade-in-up delay-300 flex-wrap">
+                <a href="#projects" class="px-8 py-4 bg-[#4a9d7f] hover:bg-[#6bc4a0] rounded-full font-semibold text-lg transition-all duration-300 btn-glow transform hover:scale-105">
+                    Explore Projects
+                </a>
+                <a href="#founder" class="px-8 py-4 glass hover:border-[#6bc4a0] rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                    Meet the Founder
+                </a>
             </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="reveal">
-        <h2 class="section-title">Upcoming Projects</h2>
-        <p class="section-subtitle">Innovative solutions that will redefine how we interact with artificial intelligence</p>
-        
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon">🧠</div>
-                <h3>Neural Nexus</h3>
-                <p>Advanced neural network architecture designed for real-time decision making and adaptive learning across multiple domains.</p>
-                <span class="project-status">In Development</span>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">🌐</div>
-                <h3>Quantum Insights</h3>
-                <p>Next-generation data analysis platform leveraging quantum-inspired algorithms for unprecedented computational efficiency.</p>
-                <span class="project-status">Research Phase</span>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">🤖</div>
-                <h3>Adaptive AI Suite</h3>
-                <p>Comprehensive AI toolkit for businesses, featuring customizable models that learn and evolve with your specific needs.</p>
-                <span class="project-status">Coming 2026</span>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">🔒</div>
-                <h3>SecureAI Protocol</h3>
-                <p>Revolutionary security framework ensuring AI systems remain transparent, accountable, and protected against adversarial attacks.</p>
-                <span class="project-status">Beta Testing</span>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">💡</div>
-                <h3>Cognitive Canvas</h3>
-                <p>Creative AI platform that collaborates with artists, designers, and creators to push the boundaries of digital expression.</p>
-                <span class="project-status">Concept Stage</span>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon">🌍</div>
-                <h3>Global Impact Initiative</h3>
-                <p>AI-powered solutions addressing climate change, healthcare accessibility, and education equity on a global scale.</p>
-                <span class="project-status">Planning</span>
+            <div class="mt-16 scroll-indicator fade-in-up delay-500">
+                <i class="fas fa-chevron-down text-3xl text-[#6bc4a0]"></i>
             </div>
         </div>
     </section>
 
-    <!-- Founder Section -->
-    <section id="founder" class="reveal">
-        <div class="founder-section">
-            <div class="founder-content">
-                <div class="founder-image">
-                    <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-495Z-e4451653.jpg" alt="Founder & CEO">
+    <section id="about" class="py-24 px-6 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-5xl font-bold mb-6 gradient-text">Pioneering Tomorrow's Intelligence</h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        At aemino, we're not just building AI—we're crafting the foundation for a smarter, more connected future. Our mission is to develop artificial intelligence that's accessible, ethical, and transformative.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        We believe in AI that augments human potential, solves real-world challenges, and creates opportunities for innovation across every industry.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Through rigorous research, cutting-edge technology, and a commitment to responsible AI development, we're shaping the next generation of intelligent systems.
+                    </p>
                 </div>
-                <div class="founder-info">
-                    <h2>Meet Our Founder</h2>
-                    <p class="founder-title">Founder & CEO</p>
-                    <div class="founder-bio">
-                        <p>Driven by a passion for innovation and a vision to democratize artificial intelligence, our founder leads aemino with a commitment to building AI that serves humanity.</p>
-                        <p>With a background in cutting-edge research and a deep understanding of both the technical and ethical dimensions of AI, the leadership at aemino ensures that every project we undertake pushes boundaries while maintaining the highest standards of responsibility.</p>
-                        <p>"We're not just building technology—we're building the future. And that future must be inclusive, ethical, and transformative for everyone."</p>
+                <div class="relative">
+                    <div class="glass rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500">
+                        <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" 
+                             alt="aemino AI" 
+                             class="w-full rounded-2xl">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <p>&copy; 2025 aemino. All rights reserved.</p>
-        <p>Building the future of AI, one innovation at a time.</p>
-        <div class="social-links">
-            <a href="#" aria-label="Twitter">𝕏</a>
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="GitHub">⚡</a>
+    <section id="projects" class="py-24 px-6 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-4 gradient-text">Upcoming Projects</h2>
+                <p class="text-gray-400 text-xl max-w-2xl mx-auto">
+                    Revolutionary AI tools that will transform how we interact with technology
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="project-card glass rounded-3xl p-8 cursor-pointer" onclick="openModal('celesta')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4a9d7f] to-[#6bc4a0] rounded-2xl flex items-center justify-center icon-float">
+                            <i class="fas fa-brain text-3xl text-white"></i>
+                        </div>
+                        <span class="px-4 py-1 bg-[#4a9d7f]/20 text-[#6bc4a0] rounded-full text-sm font-semibold">In Development</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#6bc4a0]">Celesta AI</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Advanced conversational AI platform with multi-modal capabilities, designed to understand context and deliver human-like interactions across various domains.
+                    </p>
+                </div>
+
+                <div class="project-card glass rounded-3xl p-8 cursor-pointer" onclick="openModal('researchmatic')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#6bc4a0] to-[#f4d35e] rounded-2xl flex items-center justify-center icon-float">
+                            <i class="fas fa-microscope text-3xl text-white"></i>
+                        </div>
+                        <span class="px-4 py-1 bg-[#f4d35e]/20 text-[#f4d35e] rounded-full text-sm font-semibold">Beta Testing</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#6bc4a0]">Researchmatic</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        AI-powered research assistant that automates literature reviews, data analysis, and generates comprehensive research insights in minutes.
+                    </p>
+                </div>
+
+                <div class="project-card glass rounded-3xl p-8 cursor-pointer" onclick="openModal('autotut')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#f4d35e] to-[#4a9d7f] rounded-2xl flex items-center justify-center icon-float">
+                            <i class="fas fa-graduation-cap text-3xl text-white"></i>
+                        </div>
+                        <span class="px-4 py-1 bg-[#6bc4a0]/20 text-[#6bc4a0] rounded-full text-sm font-semibold">Coming Soon</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#6bc4a0]">Autotut</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Intelligent tutoring system that adapts to individual learning styles, providing personalized education experiences with real-time feedback and progress tracking.
+                    </p>
+                </div>
+
+                <div class="project-card glass rounded-3xl p-8 cursor-pointer" onclick="openModal('gopredict')">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4a9d7f] to-[#f4d35e] rounded-2xl flex items-center justify-center icon-float">
+                            <i class="fas fa-chart-line text-3xl text-white"></i>
+                        </div>
+                        <span class="px-4 py-1 bg-[#f4d35e]/20 text-[#f4d35e] rounded-full text-sm font-semibold">Research Phase</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#6bc4a0]">Go Predict</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Predictive analytics engine leveraging machine learning to forecast trends, behaviors, and outcomes with unprecedented accuracy across industries.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="founder" class="py-24 px-6 reveal">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass rounded-3xl p-8 md:p-12">
+                <div class="grid md:grid-cols-5 gap-12 items-center">
+                    <div class="md:col-span-2">
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-[#4a9d7f] to-[#f4d35e] rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
+                            <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-495Z-e4451653.jpg" 
+                                 alt="Bhavya Jain" 
+                                 class="relative rounded-3xl w-full shadow-2xl">
+                        </div>
+                    </div>
+                    <div class="md:col-span-3">
+                        <h2 class="text-4xl font-bold mb-2 gradient-text">Bhavya Jain</h2>
+                        <p class="text-[#f4d35e] text-xl font-semibold mb-2">Founder & CEO</p>
+                        <p class="text-gray-400 mb-6 text-lg">16 years old • AI Innovator & Educator</p>
+                        
+                        <div class="space-y-4 text-gray-400 leading-relaxed">
+                            <p class="text-lg">
+                                At just 16, Bhavya Jain is driving the future of AI and teaching people worldwide how to harness its power. With a passion for innovation and a vision to democratize artificial intelligence, Bhavya founded aemino to create tools that can change the AI world.
+                            </p>
+                            <p class="text-lg">
+                                As both a creator and educator, Bhavya believes in making AI accessible to everyone—building cutting-edge solutions while empowering the next generation of AI enthusiasts through teaching and mentorship.
+                            </p>
+                            <blockquote class="border-l-4 border-[#6bc4a0] pl-6 italic text-lg mt-6">
+                                "We're not just building technology—we're building the future. Creating tools that empower people to achieve what was once impossible."
+                            </blockquote>
+                        </div>
+
+                        <div class="flex gap-4 mt-8">
+                            <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-[#4a9d7f] transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-[#4a9d7f] transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-[#4a9d7f] transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" 
+                     alt="aemino" 
+                     class="h-8 w-8">
+                <span class="text-2xl font-bold gradient-text">aemino</span>
+            </div>
+            <p class="text-gray-400 mb-2">&copy; 2025 aemino. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">Building the future of AI, one innovation at a time.</p>
         </div>
     </footer>
 
+    <div id="modal-celesta" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('celesta')" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-16 h-16 bg-gradient-to-br from-[#4a9d7f] to-[#6bc4a0] rounded-2xl flex items-center justify-center mb-6">
+                <i class="fas fa-brain text-3xl text-white"></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-4 gradient-text">Celesta AI</h3>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Celesta AI is our flagship conversational AI platform designed to revolutionize human-computer interaction. With advanced natural language processing, multi-modal understanding, and context-aware responses, Celesta delivers experiences that feel genuinely human.
+            </p>
+            <div class="space-y-3 text-gray-400">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Multi-modal AI with vision, text, and audio capabilities</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Context-aware conversations with long-term memory</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Enterprise-ready with custom training capabilities</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <span class="px-4 py-2 bg-[#4a9d7f]/20 text-[#6bc4a0] rounded-full text-sm font-semibold">Status: In Development</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-researchmatic" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('researchmatic')" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-16 h-16 bg-gradient-to-br from-[#6bc4a0] to-[#f4d35e] rounded-2xl flex items-center justify-center mb-6">
+                <i class="fas fa-microscope text-3xl text-white"></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-4 gradient-text">Researchmatic</h3>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Researchmatic transforms the research process by automating tedious tasks and providing intelligent insights. From literature reviews to data analysis, our AI assistant helps researchers focus on what matters most—discovery and innovation.
+            </p>
+            <div class="space-y-3 text-gray-400">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Automated literature review and citation management</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>AI-powered data analysis and visualization</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Intelligent research paper summarization</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <span class="px-4 py-2 bg-[#f4d35e]/20 text-[#f4d35e] rounded-full text-sm font-semibold">Status: Beta Testing</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-autotut" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('autotut')" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-16 h-16 bg-gradient-to-br from-[#f4d35e] to-[#4a9d7f] rounded-2xl flex items-center justify-center mb-6">
+                <i class="fas fa-graduation-cap text-3xl text-white"></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-4 gradient-text">Autotut</h3>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Autotut is revolutionizing education with personalized AI tutoring that adapts to each student's unique learning style. Our intelligent system provides real-time feedback, tracks progress, and ensures every learner reaches their full potential.
+            </p>
+            <div class="space-y-3 text-gray-400">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Adaptive learning paths based on individual progress</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Real-time feedback and performance analytics</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Multi-subject support with interactive content</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <span class="px-4 py-2 bg-[#6bc4a0]/20 text-[#6bc4a0] rounded-full text-sm font-semibold">Status: Coming Soon</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-gopredict" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('gopredict')" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-16 h-16 bg-gradient-to-br from-[#4a9d7f] to-[#f4d35e] rounded-2xl flex items-center justify-center mb-6">
+                <i class="fas fa-chart-line text-3xl text-white"></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-4 gradient-text">Go Predict</h3>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+                Go Predict harnesses the power of advanced machine learning to forecast trends, behaviors, and outcomes with remarkable accuracy. From business intelligence to market analysis, our predictive engine helps organizations make data-driven decisions with confidence.
+            </p>
+            <div class="space-y-3 text-gray-400">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Advanced forecasting with neural networks</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Real-time trend analysis and anomaly detection</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-check-circle text-[#6bc4a0] mt-1"></i>
+                    <span>Industry-specific prediction models</span>
+                </div>
+            </div>
+            <div class="mt-8">
+                <span class="px-4 py-2 bg-[#f4d35e]/20 text-[#f4d35e] rounded-full text-sm font-semibold">Status: Research Phase</span>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('mobile-menu').classList.remove('translate-x-0');
+                    document.getElementById('mobile-menu').classList.add('translate-x-full');
                 }
             });
         });
 
-        // Scroll reveal animation
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('translate-x-full');
+            document.getElementById('mobile-menu').classList.add('translate-x-0');
+        });
+
+        document.getElementById('close-menu').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('translate-x-0');
+            document.getElementById('mobile-menu').classList.add('translate-x-full');
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         const reveals = document.querySelectorAll('.reveal');
         
         const revealOnScroll = () => {
@@ -578,15 +648,33 @@
         };
 
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
+        revealOnScroll();
 
-        // Parallax effect for hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-content');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                hero.style.opacity = 1 - scrolled / 700;
+        function openModal(projectId) {
+            document.getElementById(`modal-${projectId}`).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(projectId) {
+            document.getElementById(`modal-${projectId}`).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
             }
         });
     </script>
