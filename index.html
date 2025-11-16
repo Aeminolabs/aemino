@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aemino - AI Innovation Redefined</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #4a9d7f;
+            --dark-green: #2d5f4f;
+            --light-green: #6bc4a0;
+            --yellow: #f4d35e;
+            --dark-bg: #0a0f0d;
+            --card-bg: #111816;
+            --text-primary: #ffffff;
+            --text-secondary: #a0b3a8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0f0d 0%, #1a2f25 50%, #0a0f0d 100%);
+            z-index: -2;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: radial-gradient(circle at 1px 1px, var(--primary-green) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 15, 13, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(74, 157, 127, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--light-green), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-green);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 157, 127, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-green);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(74, 157, 127, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--yellow));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: 0 20px 40px rgba(74, 157, 127, 0.2);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--light-green);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-status {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(74, 157, 127, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--light-green);
+            font-weight: 600;
+        }
+
+        /* Founder Section */
+        .founder-section {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 4rem;
+            border: 1px solid rgba(74, 157, 127, 0.1);
+        }
+
+        .founder-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .founder-image {
+            position: relative;
+        }
+
+        .founder-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .founder-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-green);
+        }
+
+        .founder-title {
+            font-size: 1.2rem;
+            color: var(--yellow);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .founder-bio {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(74, 157, 127, 0.1);
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .founder-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .founder-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" alt="aemino logo">
+            <span>aemino</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#founder">Founder</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI Innovation Redefined</h1>
+            <p>Building the future of artificial intelligence with cutting-edge solutions that transform industries and empower humanity.</p>
+            <a href="#projects" class="cta-button">Explore Our Vision</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="reveal">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Pioneering Tomorrow's Intelligence</h2>
+                <p>At aemino, we're not just building AI—we're crafting the foundation for a smarter, more connected future. Our mission is to develop artificial intelligence that's accessible, ethical, and transformative.</p>
+                <p>We believe in AI that augments human potential, solves real-world challenges, and creates opportunities for innovation across every industry.</p>
+                <p>Through rigorous research, cutting-edge technology, and a commitment to responsible AI development, we're shaping the next generation of intelligent systems.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-492Z-cc49fb91.jpg" alt="aemino AI visualization">
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="reveal">
+        <h2 class="section-title">Upcoming Projects</h2>
+        <p class="section-subtitle">Innovative solutions that will redefine how we interact with artificial intelligence</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">🧠</div>
+                <h3>Neural Nexus</h3>
+                <p>Advanced neural network architecture designed for real-time decision making and adaptive learning across multiple domains.</p>
+                <span class="project-status">In Development</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">🌐</div>
+                <h3>Quantum Insights</h3>
+                <p>Next-generation data analysis platform leveraging quantum-inspired algorithms for unprecedented computational efficiency.</p>
+                <span class="project-status">Research Phase</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">🤖</div>
+                <h3>Adaptive AI Suite</h3>
+                <p>Comprehensive AI toolkit for businesses, featuring customizable models that learn and evolve with your specific needs.</p>
+                <span class="project-status">Coming 2026</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">🔒</div>
+                <h3>SecureAI Protocol</h3>
+                <p>Revolutionary security framework ensuring AI systems remain transparent, accountable, and protected against adversarial attacks.</p>
+                <span class="project-status">Beta Testing</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">💡</div>
+                <h3>Cognitive Canvas</h3>
+                <p>Creative AI platform that collaborates with artists, designers, and creators to push the boundaries of digital expression.</p>
+                <span class="project-status">Concept Stage</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">🌍</div>
+                <h3>Global Impact Initiative</h3>
+                <p>AI-powered solutions addressing climate change, healthcare accessibility, and education equity on a global scale.</p>
+                <span class="project-status">Planning</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section id="founder" class="reveal">
+        <div class="founder-section">
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="https://client-uploads.nyc3.digitaloceanspaces.com/images/15aa1149-c7e8-48f4-b9c8-83bb2edaf8fa/2025-11-16T16-01-27-495Z-e4451653.jpg" alt="Founder & CEO">
+                </div>
+                <div class="founder-info">
+                    <h2>Meet Our Founder</h2>
+                    <p class="founder-title">Founder & CEO</p>
+                    <div class="founder-bio">
+                        <p>Driven by a passion for innovation and a vision to democratize artificial intelligence, our founder leads aemino with a commitment to building AI that serves humanity.</p>
+                        <p>With a background in cutting-edge research and a deep understanding of both the technical and ethical dimensions of AI, the leadership at aemino ensures that every project we undertake pushes boundaries while maintaining the highest standards of responsibility.</p>
+                        <p>"We're not just building technology—we're building the future. And that future must be inclusive, ethical, and transformative for everyone."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2025 aemino. All rights reserved.</p>
+        <p>Building the future of AI, one innovation at a time.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="GitHub">⚡</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - scrolled / 700;
+            }
+        });
+    </script>
+</body>
+</html>
